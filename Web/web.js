@@ -1,6 +1,34 @@
-// Discord-style floating particles
+// Minecraft-style floating particles
+function createParticle() {
+    const particles = document.querySelector('.minecraft-particles');
+    if (!particles) return;
+
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    // Random position
+    particle.style.left = Math.random() * 100 + '%';
+    
+    // Random size
+    const size = Math.random() * 3 + 1;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    
+    // Random animation duration
+    const duration = Math.random() * 5 + 5;
+    particle.style.animation = `float ${duration}s linear infinite`;
+    
+    particles.appendChild(particle);
+    
+    // Remove particle after animation
+    setTimeout(() => {
+        particle.remove();
+    }, duration * 1000);
+}
+
+// Initialize particles
 function initParticles() {
-    const particlesContainer = document.querySelector('.Discord-particles-1');
+    const particlesContainer = document.querySelector('.web-particles');
     const numParticles = 50;
     
     for (let i = 0; i < numParticles; i++) {
@@ -23,103 +51,72 @@ function initParticles() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize particles
-    initParticles();
-    
-    // Filter functionality
-    const filterBtns = document.querySelectorAll('.filter-btn');
+
+// Project filtering functionality
+function filterProjects(category) {
+    const projectCards = document.querySelectorAll('.project-card');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    // Update active filter button
+    filterButtons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // Filter projects
+    projectCards.forEach(card => {
+        const projectType = card.getAttribute('data-type').toLowerCase();
+        if (category === 'all' || projectType === category.toLowerCase()) {
+            card.style.display = 'block';
+            // Add animation
+            card.style.animation = 'fadeIn 0.5s ease-in-out';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// Initialize everything when the DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all filter buttons and project cards
+    const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+    // Set initial active state on 'All' button
+    document.querySelector('[data-filter="all"]').classList.add('active');
+
+    // Add click event to each filter button
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
             // Remove active class from all buttons
-            filterBtns.forEach(b => b.classList.remove('active'));
+            filterButtons.forEach(btn => btn.classList.remove('active'));
             // Add active class to clicked button
-            btn.classList.add('active');
+            button.classList.add('active');
 
-            const filterValue = btn.getAttribute('data-filter');
+            const filterValue = button.getAttribute('data-filter');
 
+            // Filter projects
             projectCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                
-                if (filterValue === 'all' || category === filterValue) {
+                if (filterValue === 'all') {
                     card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 50);
                 } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
+                    if (card.getAttribute('data-type') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
                         card.style.display = 'none';
-                    }, 300);
+                    }
                 }
             });
         });
     });
+
+    // Initialize particles
+    initParticles();
 });
 
-function createParticle(container) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    
-    // Random particle styles
-    particle.style.cssText = `
-        position: absolute;
-        width: ${Math.random() * 3 + 1}px;
-        height: ${Math.random() * 3 + 1}px;
-        background: rgba(100, 255, 218, ${Math.random() * 0.5 + 0.2});
-        left: ${Math.random() * 100}vw;
-        top: ${Math.random() * 100}vh;
-        animation: float ${Math.random() * 10 + 5}s linear infinite;
-        opacity: ${Math.random() * 0.5 + 0.3};
-        box-shadow: 0 0 ${Math.random() * 10 + 5}px rgba(100, 255, 218, 0.3);
-    `;
-    
-    container.appendChild(particle);
-    
-    // Remove particle after animation
-    setTimeout(() => {
-        particle.remove();
-        createParticle(container);
-    }, (Math.random() * 10 + 5) * 1000);
-}
-
-function createParticle() {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    
-    // Random particle styles
-    particle.style.cssText = `
-        position: absolute;
-        width: ${Math.random() * 3 + 1}px;
-        height: ${Math.random() * 3 + 1}px;
-        background: rgba(100, 255, 218, ${Math.random() * 0.5 + 0.2});
-        left: ${Math.random() * 100}vw;
-        top: ${Math.random() * document.documentElement.scrollHeight}px;
-        animation: float ${Math.random() * 10 + 5}s linear infinite;
-        opacity: ${Math.random() * 0.5 + 0.3};
-        box-shadow: 0 0 ${Math.random() * 10 + 5}px rgba(100, 255, 218, 0.3);
-    `;
-    
-    document.body.appendChild(particle);
-    
-    // Remove particle after animation
-    setTimeout(() => {
-        particle.remove();
-        createParticle();
-    }, (Math.random() * 10 + 5) * 1000);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    for (let i = 0; i < 400; i++) { // Increased the number of particles
-        createParticle();
-    }
-});
-
-// Hamburger Menu
 document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
@@ -221,9 +218,26 @@ class ParticleSystem {
 
 // Initialize particle system when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    const particleSystem = new ParticleSystem('particles-canvas', '#7289DA');
+    const particleSystem = new ParticleSystem('particles-canvas', '#61dafb');
     particleSystem.animate();
 });
+
+// Animation Timeline
+var infie = gsap.timeline()
+
+infie.from(".logo",{
+    y: -20,
+    opacity: 0,
+    duration: 0.44,
+    delay:0.5
+})
+
+infie.from(".nav-links li",{
+    y: -20,
+    opacity: 0,
+    duration: 0.44,
+    stagger: 0.3
+})
 
 // Three dot function for menu 
 function toggleMenu() {
@@ -250,47 +264,17 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-// Animation Timeline
-var infie = gsap.timeline()
-
-infie.from(".logo",{
-    y: -20,
-    opacity: 0,
-    duration: 0.44,
-    delay:0.5
-})
-
-infie.from(".nav-links li",{
-    y: -20,
-    opacity: 0,
-    duration: 0.44,
-    stagger: 0.3
-})
-
-infie.from(".discord-content",{
-    y: 40,
-    opacity: 0,
-    duration: 0.44,
-})
-
-infie.from(".discord-features",{
-    y: 40,
-    opacity: 0,
-    duration: 0.44,
-    stagger: 0.3
-})
-
 // Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
 // Scroll Animations
 document.addEventListener('DOMContentLoaded', () => {
-    // Discord Features Animation
-    const discordFeatures = document.querySelectorAll('.discord-feature');
-    discordFeatures.forEach((item, index) => {
-        gsap.from(item, {
+    // Project Cards Animation
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card, index) => {
+        gsap.from(card, {
             scrollTrigger: {
-                trigger: item,
+                trigger: card,
                 start: "top 80%",
                 toggleActions: "play none none none"
             },
@@ -301,25 +285,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Discord Content Animation
-    gsap.from(".discord-content", {
+    // Card Content Animation
+    gsap.from(".card-content", {
         scrollTrigger: {
-            trigger: ".discord-content",
+            trigger: ".card-content",
             start: "top 75%",
         },
         y: 80,
         opacity: 0,
-        duration: 0.8
+        duration: 0.8,
+        stagger: 0.2
     });
 
-    // Server Section Animation
-    gsap.from(".server-section", {
+    // Particles Container Animation
+    gsap.from(".particles-container", {
         scrollTrigger: {
-            trigger: ".server-section",
+            trigger: ".particles-container",
             start: "top 80%",
         },
-        y: 50,
+        scale: 0.9,
         opacity: 0,
-        duration: 0.8
+        duration: 1
+    });
+
+    // Card Hover Animations
+    projectCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                y: -10,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                y: 0,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
     });
 });

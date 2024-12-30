@@ -1,3 +1,106 @@
+// ! open animation 
+var infie = gsap.timeline()
+
+infie.from(".logo",{
+    y: -20,
+    opacity: 0,
+    duration: 0.44,
+    delay:0.5
+})
+
+infie.from("#a1",{
+    y: -20,
+    opacity: 0,
+    duration: 0.44,
+    stagger: 0.3
+})
+infie.from("#a2",{
+    y: -20,
+    opacity: 0,
+    duration: 0.44,
+    stagger: 0.3
+})
+infie.from("#a3",{
+    y: -20,
+    opacity: 0,
+    duration: 0.44,
+    stagger: 0.3
+})
+infie.from("#a4",{
+    y: -20,
+    opacity: 0,
+    duration: 0.44,
+    stagger: 0.3
+})
+
+gsap.from("#Mine1",{
+    y: 40,
+    opacity: 0,
+    duration: 0.44,
+})
+gsap.from("#sub",{
+    y: 40,
+    opacity: 0,
+    duration: 0.44,
+})
+
+// Register ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
+
+// Scroll Animations
+document.addEventListener('DOMContentLoaded', () => {
+    // Expertise Items Animation
+    const expertiseItems = document.querySelectorAll('.expertise-item');
+    expertiseItems.forEach((item, index) => {
+        gsap.from(item, {
+            scrollTrigger: {
+                trigger: item,
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            delay: index * 0.2
+        });
+    });
+
+    // Work Section Animation
+    gsap.from(".work-content", {
+        scrollTrigger: {
+            trigger: ".work-content",
+            start: "top 75%",
+        },
+        y: 80,
+        opacity: 0,
+        duration: 0.8
+    });
+
+    // Contact Section Animation
+    gsap.from(".get-in-touch-content", {
+        scrollTrigger: {
+            trigger: ".get-in-touch",
+            start: "top 80%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8
+    });
+
+    // Continuous Floating Animation for Geometric Shapes
+    gsap.to(".geometric-shapes .shape", {
+        y: -20,
+        rotation: 360,
+        duration: 2,
+        yoyo: true,
+        repeat: -1,
+        ease: "power1.inOut",
+        stagger: {
+            amount: 1
+        }
+    });
+});
+
 // Initialize Three.js scene for geometric shapes
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -246,6 +349,33 @@ scrollButton.addEventListener('click', () => {
     });
     scrollButton.classList.add('animate');
     hasAnimated = true;
+});
+
+// Hamburger Menu
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
+
+    // Close menu when clicking on a nav link (for smooth scrolling)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
 });
 
 // Added animatePageLoad function to trigger the loading animation on page load

@@ -1,0 +1,76 @@
+/* Default state: hide the menu icon */
+.menu-icon {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+}
+
+/* Horizontal navigation bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    transition: right 0.3s ease;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ffffff ;
+}
+
+/* Hide the nav buttons and show the menu icon on smaller screens */
+@media (max-width: 1000px) {
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        right: -100%;
+        background: rgb(34 32 32 / 94%);
+        border: 1px solid #ccc;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        transition: right 0.3s ease;
+    }
+    .menu-icon {
+        display: flex;
+    }
+}
+
+/* Show the nav buttons horizontally when the menu icon is clicked */
+.nav-links.active {
+    right: 0;
+    background: rgb(34 32 32 / 94%);
+}
+
+/* Animation for the menu icon */
+.menu-icon.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-icon.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}

@@ -77,120 +77,249 @@ const projectData = {
     }
 };
 
-function showDetails(projectId) {
-    const popup = document.getElementById('project-details-popup');
-    const selectedProject = document.querySelector(`[data-id="${projectId}"]`);
-    
-    if (!selectedProject || !popup) {
-        console.error('Project or popup not found');
-        return;
-    }
-    
-    const project = projectData[projectId];
-    if (!project) {
-        console.error('Project data not found for ID:', projectId);
-        return;
-    }
-    
-    // Update popup content
-    popup.querySelector('.popup-title').textContent = project.title;
-    popup.querySelector('.project-type').textContent = project.type;
-    popup.querySelector('.project-description').textContent = project.description;
-    
-    // Update features list
-    const featuresList = popup.querySelector('.features-list');
-    featuresList.innerHTML = project.features
-        .map(feature => `<li>${feature}</li>`)
-        .join('');
-    
-    // Update project image
-    const projectImage = selectedProject.querySelector('.card-front img');
-    if (projectImage) {
-        const newImage = projectImage.cloneNode(true);
-        const popupImage = popup.querySelector('.project-image');
-        popupImage.innerHTML = '';
-        popupImage.appendChild(newImage);
-    }
-    
-    // Show popup
-    document.body.style.overflow = 'hidden';
-    popup.style.display = 'block';
-    
-    // Force reflow and add active class
-    popup.offsetHeight;
-    popup.classList.add('active');
-}
+// Project Data
+const projectsData = {
+    'thunder-rtp': {
+        title: 'Thunder RTP',
+        category: 'Plugin',
+        description: 'Thunder RTP is a cutting-edge Minecraft plugin designed for Spigot, Paper servers, aimed at enhancing player engagement through a unique quarry system.',
+        image: 'images/Minecraft-logo.jpeg',
+        features: [
+            'Custom Quarry System',
+            'Enhanced Player Engagement',
+            'Server Performance Optimization',
+            'Intuitive Configuration'
+        ],
+        downloads: [
+            {
+                platform: 'Spigot MC',
+                url: '#',
+                icon: 'images/spigot-icon.png'
+            }
+        ]
+    },
+    // Add more projects here following the same structure
+};
 
-function closePopup() {
-    const popup = document.getElementById('project-details-popup');
-    if (!popup) return;
-    
-    popup.classList.remove('active');
-    document.body.style.overflow = '';
-    
-    setTimeout(() => {
-        popup.style.display = 'none';
-    }, 300);
-}
+document.addEventListener('DOMContentLoaded', () => {
+    // Get all filter buttons
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
 
-// Close popup when clicking outside
-document.addEventListener('click', function(e) {
-    const popup = document.getElementById('project-details-popup');
-    if (popup && e.target === popup) {
-        closePopup();
+    // Add click event to each filter button
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
+
+            const filterValue = button.getAttribute('data-filter');
+
+            projectCards.forEach(card => {
+                if (filterValue === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    if (card.getAttribute('data-type') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+
+    // Set 'All' filter as active by default
+    const allFilter = document.querySelector('[data-filter="all"]');
+    if (allFilter) {
+        allFilter.click();
+    }
+
+    // Initialize particles
+    setTimeout(createParticles, 100);
+    window.addEventListener('resize', () => {
+        clearTimeout(window.resizeTimer);
+        window.resizeTimer = setTimeout(createParticles, 250);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
     }
 });
 
-// Project filtering functionality
-function filterProjects(category) {
-    const projectCards = document.querySelectorAll('.project-card');
-    const filterButtons = document.querySelectorAll('.filter-btn');
+// Particle system
+function createParticles() {
+    const container = document.querySelector('.minecraft-particles');
+    container.innerHTML = '';
 
-    // Update active filter button
-    filterButtons.forEach(btn => {
-        if (btn.getAttribute('data-filter') === category) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
+    // Reduced particle count for better performance
+    const particleCount = Math.floor(window.innerWidth / 40);
+    
+    // Create particles in batches
+    const fragment = document.createDocumentFragment();
 
-    // Filter projects
-    projectCards.forEach(card => {
-        const projectType = card.getAttribute('data-type').toLowerCase();
-        if (category === 'all' || projectType === category.toLowerCase()) {
-            card.style.display = 'block';
-            // Add animation
-            card.style.animation = 'fadeIn 0.5s ease-in-out';
-        } else {
-            card.style.display = 'none';
-        }
-    });
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'minecraft-particle';
+        
+        // Random initial position
+        const x = Math.random() * window.innerWidth;
+        const delay = Math.random() * 10;
+        
+        particle.style.left = `${x}px`;
+        particle.style.animationDelay = `-${delay}s`;
+        
+        // Random size variation
+        const size = 1.5 + Math.random() * 1.5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Random opacity
+        particle.style.opacity = 0.1 + Math.random() * 0.3;
+        
+        // Reduced drift range for better performance
+        const drift = -10 + Math.random() * 20;
+        particle.style.setProperty('--particle-drift', `${drift}px`);
+        
+        fragment.appendChild(particle);
+    }
+    
+    container.appendChild(fragment);
 }
 
-// Initialize everything when the DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize particles
-    initParticles();
-    
-    // Initialize project links
-    const projectLinks = document.querySelectorAll('.project-link');
-    projectLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            const projectId = this.closest('.project-card').getAttribute('data-id');
-            showDetails(projectId);
+// Three dot function for menu 
+function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    const menuIcon = document.querySelector('.menu-icon');
+
+    if (navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        menuIcon.classList.remove('active');
+    } else {
+        navLinks.classList.add('active');
+        menuIcon.classList.add('active');
+    }
+}
+
+// Close the menu when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        const navLinks = document.querySelector('.nav-links');
+        const menuIcon = document.querySelector('.menu-icon');
+
+        navLinks.classList.remove('active');
+        menuIcon.classList.remove('active');
+    });
+});
+
+// Animation Timeline
+var infie = gsap.timeline()
+
+infie.from(".logo",{
+    y: -20,
+    opacity: 0,
+    duration: 0.44,
+    delay:0.5
+})
+
+infie.from(".nav-links li",{
+    y: -20,
+    opacity: 0,
+    duration: 0.44,
+    stagger: 0.3
+})
+
+infie.from(".minecraft-content",{
+    y: 40,
+    opacity: 0,
+    duration: 0.44,
+})
+
+infie.from(".minecraft-features",{
+    y: 40,
+    opacity: 0,
+    duration: 0.44,
+    stagger: 0.3
+})
+
+// Register ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
+
+// Scroll Animations
+document.addEventListener('DOMContentLoaded', () => {
+    // Minecraft Features Animation
+    const minecraftFeatures = document.querySelectorAll('.minecraft-feature');
+    minecraftFeatures.forEach((item, index) => {
+        gsap.from(item, {
+            scrollTrigger: {
+                trigger: item,
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            delay: index * 0.2
         });
     });
 
-    // Initialize filter buttons
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('data-filter');
-            filterProjects(category);
-        });
+    // Minecraft Content Animation
+    gsap.from(".minecraft-content", {
+        scrollTrigger: {
+            trigger: ".minecraft-content",
+            start: "top 75%",
+        },
+        y: 80,
+        opacity: 0,
+        duration: 0.8
     });
 
-    // Set initial filter to 'all'
-    filterProjects('all');
+    // Server Features Animation
+    gsap.from(".server-features", {
+        scrollTrigger: {
+            trigger: ".server-features",
+            start: "top 80%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8
+    });
+
+    // Pixel Art Animation for Minecraft Theme
+    gsap.from(".pixel-art-element", {
+        scrollTrigger: {
+            trigger: ".pixel-art-element",
+            start: "top 85%",
+        },
+        scale: 0,
+        opacity: 0,
+        duration: 0.4,
+        stagger: 0.1
+    });
 });

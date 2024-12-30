@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINECRAFT | SERVER SETUP</title>
+    <link rel="stylesheet" href="../../help.css">
+    <link rel="stylesheet" href="help1.css">
+    <link rel="stylesheet" href="../../mine.css">
+    <link rel="stylesheet" href="../../../shared-nav.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .project-card {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .project-category {
+            background-color: #2c2c2c;
+            color: #fff;
+            padding: 10px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .project-title {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .left-side {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%;
+            margin-right: 10px;
+        }
+
+        .right-side {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%;
+        }
+
+        .minecraft-button {
+            background-color: #2c2c2c;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .minecraft-button:hover {
+            background-color: #333;
+        }
+
+        @media (min-width: 768px) {
+            .popup-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+
+<body class="minecraft-theme">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">Portfolio._</div>
+        <ul class="nav-links">
+            <ul class="nav-links">
+                <li><a href="../../../index.html">01 // Home</a></li>
+                <li><a href="../../mine.html">02 // Back</a></li>
+            </ul>
+            <div class="menu-icon" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+    </nav>
+
+    <!-- Minecraft Projects Section -->
+    <div class="particles-container">
+        <div class="minecraft-particles"></div>
+    </div>
+
+    <section class="minecraft-projects">
+        <div class="section-header">
+            <h1 style="font-size: 59px; display: flex; justify-content: center;">Minecraft Server Setup</h1>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+
+            <!-- ? Config Project -->
+
+            <div class="project-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="images/bedwars.png" alt="bedwars-image" class="project-image">
+                        <h3 class="project-title">BedWars</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="images/bedwars.png" alt="bedwars-image" class="project-image">
+                        <h3 class="project-title">BedWars</h3>
+                        <p class="project-description">Bed Wars is a Minecraft mini-game where teams protect their beds, gather resources, and destroy opponents' beds to win.
+                        </p>
+                        <a href="Bedwars/bedwars.html" class="minecraft-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="images/skywars.png" alt="skywars-image" class="project-image">
+                        <h3 class="project-title">SkyWars</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="images/skywars.png" alt="skywars-image" class="project-image">
+                        <h3 class="project-title">Skywars</h3>
+                        <p class="project-description">SkyWars is a Minecraft mini-game where players start on floating islands, gather resources, and fight to be the last standing
+                        </p>
+                        <a href="SkyWars/Skywars.html" class="minecraft-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="images/skyblock.png" alt="skyblock-image" class="project-image">
+                        <h3 class="project-title">Skyblock</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="images/skyblock.png" alt="skyblock-image" class="project-image">
+                        <h3 class="project-title">Skyblock</h3>
+                        <p class="project-description">Skyblock is a Minecraft survival game where players start on a small island, gather resources, and expand their world.
+                        </p>
+                        <a href="Skyblock/Skyblock.html" class="minecraft-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="images/Survival.png" alt="Survival-image" class="project-image">
+                        <h3 class="project-title">Survival</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="images/Survival.png" alt="Survival-image" class="project-image">
+                        <h3 class="project-title">Survival</h3>
+                        <p class="project-description">Survival is a Minecraft game mode where players gather resources, build structures, and fend off mobs to stay alive
+                        </p>
+                        <a href="minegame.html" class="minecraft-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+    <script>
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Scroll Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Documentation Sections Animation
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.6,
+                    delay: index * 0.2
+                });
+            });
+
+            // Headings Animation
+            gsap.from("h1, h2, h3", {
+                scrollTrigger: {
+                    trigger: "h1, h2, h3",
+                    start: "top 85%",
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.2
+            });
+
+            // Code Blocks Animation
+            gsap.from("pre, code", {
+                scrollTrigger: {
+                    trigger: "pre, code",
+                    start: "top 80%",
+                },
+                x: -30,
+                opacity: 0,
+                duration: 0.5,
+                stagger: 0.1
+            });
+
+            // List Items Animation
+            gsap.from("li", {
+                scrollTrigger: {
+                    trigger: "li",
+                    start: "top 85%",
+                },
+                x: 20,
+                opacity: 0,
+                duration: 0.4,
+                stagger: 0.1
+            });
+        });
+    </script>
+    <script src="../../mine.js"></script>
+</body>
+
+</html>

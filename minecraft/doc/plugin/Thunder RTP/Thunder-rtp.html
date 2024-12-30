@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thunder RTP - Minecraft Quarry System Plugin</title>
+    <link rel="stylesheet" href="thunder-rtp.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <button class="back-button" onclick="goBack()">Back</button>
+    <div class="minecraft-container">
+        <header class="plugin-header">
+            <h1>Thunder RTP</h1>
+            <p class="version">Version 1.0</p>
+        </header>
+        <nav class="navbar plugin-nav">
+
+            <div class="menu-icon" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#commands">Commands</a></li>
+                <li><a href="#permissions">Permissions</a></li>
+                <li><a href="#configuration">Configuration</a></li>
+                <li><a href="#installation">Installation</a></li> 
+            </ul>
+        </nav>
+
+        <main class="plugin-content">
+            <section id="overview">
+                <h2>Overview</h2>
+                <p>Thunder RTP is a specialized Minecraft plugin that manages a dynamic quarry system with random
+                    teleportation features. It allows players to join different quarry territories, each with unique
+                    characteristics and purposes. The plugin includes administrative controls for server staff and a
+                    user-friendly command system for players.</p>
+            </section>
+
+            <section id="features">
+                <h2>Features</h2>
+                <ul>
+                    <li>Multiple quarry territory types with unique characteristics</li>
+                    <li>Safe teleportation system between quarries</li>
+                    <li>Administrative controls for server staff</li>
+                    <li>Welcome system for new players</li>
+                    <li>Tab completion for commands</li>
+                    <li>Comprehensive game management system</li>
+                    <li>Configuration system for easy customization</li>
+                </ul>
+            </section>
+
+            <section id="commands">
+                <h2>Commands</h2>
+                <div class="command-block">
+                    <h3>/join &lt;mode&gt;</h3>
+                    <p>Join a specific quarry game mode</p>
+                    <p class="permission">Permission: Default</p>
+                </div>
+                <div class="command-block">
+                    <h3>/forcetp &lt;quarry_type&gt;</h3>
+                    <p>Force teleport to a specific quarry territory</p>
+                    <p class="permission">Permission: thunderrtp.admin</p>
+                </div>
+                <div class="command-block">
+                    <h3>/quarries</h3>
+                    <p>List all available quarries</p>
+                    <p class="permission">Permission: Default</p>
+                </div>
+                <div class="command-block">
+                    <h3>/leavequarry</h3>
+                    <p>Leave your current quarry</p>
+                    <p class="permission">Permission: Default</p>
+                </div>
+                <div class="command-block">
+                    <h3>/forcechange &lt;quarry_type&gt;</h3>
+                    <p>Force change a player's quarry type</p>
+                    <p class="permission">Permission: thunderrtp.admin</p>
+                </div>
+            </section>
+
+            <section id="configuration">
+                <h2>Configuration</h2>
+                <div class="config-example">
+                    <pre><code># Thunder RTP Configuration
+            
+            # Teleport Range Settings
+            teleport:
+              min-range: 10000
+              max-range: 20000
+              safe-landing:
+                enabled: true
+                water-duration: 60  # ticks (20 ticks = 1 second)
+                dangerous-height: 3
+            
+            # Game Mode Settings
+            modes:
+              DUAL:
+                capacity: 2
+                enabled: true
+                display-name: "§6Dual Mode"
+              SQUAD:
+                capacity: 4
+                enabled: true
+                display-name: "§bSquad Mode"
+              HEXA:
+                capacity: 6
+                enabled: true
+                display-name: "§aHexa Mode"
+              OCTA:
+                capacity: 8
+                enabled: true
+                display-name: "§dOcta Mode"
+            
+            # Message Settings
+            messages:
+              prefix: "§6[Thunder RTP] "
+              join-quarry: "§aYou have joined %quarry_owner%'s %mode% quarry! (%current%/%max%)"
+              create-quarry: "§aYou have created a new %mode% quarry!"
+              quarry-full: "§cThat quarry is full!"
+              already-in-quarry: "§cYou are already in a quarry! Use /leavequarry first."
+              leave-quarry: "§c← §7You left the %mode% Quarry."
+            
+            # Title Settings
+            titles:
+              join:
+                title: "§6⚔ %mode% Quarry §6⚔"
+                subtitle: "§aJoined %quarry_owner%'s quarry!"
+                fade-in: 10
+                stay: 70
+                fade-out: 20
+              teleport:
+                title: "§6⚡ Teleporting §6⚡"
+                subtitle: "§aGroup teleport successful!"
+            
+            # Sound Settings
+            sounds:
+              join:
+                sound: ENTITY_PLAYER_LEVELUP
+                volume: 1.0
+                pitch: 1.0
+              leave:
+                sound: BLOCK_NOTE_BLOCK_BASS
+                volume: 1.0
+                pitch: 0.5
+              teleport:
+                sound: ENTITY_ENDERMAN_TELEPORT
+                volume: 1.0
+                pitch: 1.0
+            
+            # Admin Settings
+            admin:
+              force-tp-permission: "thunderrtp.admin"
+              force-tp-message: "§aForce teleported %player% to a %mode% quarry!"
+            
+            # Commands Settings
+            commands:
+              forcetp:
+                cooldown: 300  # Cooldown in seconds (5 minutes)
+                enabled: true  # Whether the command is enabled for non-admin players
+                min-range: 5000  # Minimum teleport range for non-admin players
+                max-range: 10000  # Maximum teleport range for non-admin players
+            </code></pre>
+                </div>
+                <p class="config-note">Note:
+                <ul>
+                    <li>Color codes (§) are used for Minecraft's color formatting system. The configuration supports
+                        various game modes, custom messages, sounds, and titles for different events.
+                    </li>
+                    <li class="config-note">This is an optional configuration file that can be edited to customize the
+                        behavior of the plugin. You can skip this because the plugin will automatically create a
+                        configuration file for you. :)
+                    </li>
+                </ul>
+                </p>
+            </section>
+
+
+
+            <section id="installation">
+                <h2>Installation</h2>
+                <ol>
+                    <li>Download <a href="https://www.spigotmc.org/resources/thunder_rtp-0-1.121225/" target="_blank"
+                            style="text-decoration: none; color: #5cbd33;">Thunder_RTP.jar</a></li>
+                    <li>Place the jar file in your server's plugins folder</li>
+                    <li>Restart your server to load the plugin</li>
+                    <li>Configure quarry types and settings in config.yml</li>
+                    <li>Set up permissions for your staff and players</li>
+                    <li>Create and designate quarry areas in your world</li>
+                    <li>Done! Enjoy the power of Thunder RTP</li>
+                </ol>
+            </section>
+        </main>
+
+        <footer class="plugin-footer">
+            <p>Thunder RTP v1.0 - Advanced Quarry Management System</p>
+            <div class="footer-links">
+                <a href="https://www.spigotmc.org/resources/thunder_rtp-0-1.121225/" target="_blank">
+                    <span>SpigotMC</span></a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuIcon = document.querySelector('.menu-icon');
+
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('active');
+            } else {
+                navLinks.classList.add('active');
+                menuIcon.classList.add('active');
+            }
+        }
+
+        // Close the menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.querySelector('.nav-links');
+                const menuIcon = document.querySelector('.menu-icon');
+
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('active');
+            });
+        });
+    </script>
+    <script src="thunderrtp.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BedWars Projects</title>
+    <link rel="stylesheet" href="../../../help.css">
+    <link rel="stylesheet" href="../help1.css">
+    <link rel="stylesheet" href="../../../mine.css">
+    <link rel="stylesheet" href="../../../../shared-nav.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Modern BedWars Theme Styles */
+        :root {
+            --primary-color: #ff3d3d;
+            --secondary-color: #4a4a4a;
+            --accent-color: #ffffff;
+            --background-color: #0a0a0a;
+            --card-background: #151515;
+            --hover-color: #ff5555;
+        }
+
+        body {
+            background-color: var(--background-color);
+            background-image: 
+                linear-gradient(45deg, #111 25%, transparent 25%),
+                linear-gradient(-45deg, #111 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #111 75%),
+                linear-gradient(-45deg, transparent 75%, #111 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            color: var(--accent-color);
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .BedWars-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--accent-color);
+            margin: 2rem 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            position: relative;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .page-title::before {
+            content: '⚔️';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -40px;
+            font-size: 0.5em;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            margin: 20px auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            place-items: center;
+        }
+
+        .project-card {
+            background: var(--card-background);
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(255, 61, 61, 0.2);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 61, 61, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 10px;
+            font-size: 0.6em;
+            font-weight: bold;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-live {
+            background: var(--primary-color);
+            color: var(--accent-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .status-working {
+            background: var(--secondary-color);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+
+        .project-details {
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-title {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            padding-right: 70px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-title:hover {
+            transform: none;
+        }
+
+        .project-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .project-card:hover .project-title::after {
+            width: 100%;
+        }
+
+        .project-description {
+            color: #a0a0a0;
+            margin-bottom: 1.5rem;
+            font-size: 0.8em;
+            line-height: 1.8;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tech-tag {
+            background: var(--secondary-color);
+            color: var(--accent-color);
+            padding: 8px 15px;
+            font-size: 0.7em;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            border: 1px solid transparent;
+        }
+
+        .tech-tag:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(255, 61, 61, 0.2);
+        }
+
+        .navbar {
+            background: var(--card-background);
+            border-bottom: 2px solid var(--primary-color);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5em;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .nav-links li a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .back-button {
+            color: var(--accent-color);
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 61, 61, 0.3);
+        }
+
+        .bed-icon {
+            width: 24px;
+            height: 24px;
+            filter: invert(1) drop-shadow(0 0 2px var(--primary-color));
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .bed-icon {
+            transform: rotate(360deg);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--hover-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2em;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .project-card {
+                width: 90%;
+            }
+
+            .project-details {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">BedWars</div>
+        <ul class="nav-links">            
+            <li><a href="../../../../index.html">01 // Home</a></li>
+            <li><a href="BedWars.html" class="back-button">02 // Back</a></li>
+        </ul>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <div class="BedWars-container">
+        <h1 class="page-title">BedWars Projects</h1>
+        
+        <div class="projects-grid">
+            <div class="noproject">
+                <h2 style="display: flex; font-size: 80px; font-family:'Times New Roman', Times, serif; margin-top: 70px;
+                margin-left: 10px;">
+                    NO PROJECT FOUND
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../../mine.js"></script>
+</body>
+</html>

@@ -4,50 +4,51 @@
     --text-secondary: #8b8b8b;
     --accent: #64ffda;
 }
-.Discord-photo1{
-    height: 130px;
-    width: 130px;
-    position: absolute;
-    top: 100px;
-    left: -50px;
-}
-.Dank-image1 {
-    height: 150px;
-    width: 150px;
-    position: absolute;
-    right: 10px;
-    top: 1256px;
-}
-/* Hide the image on screens smaller than 600px */
-@media (max-width: 1400px) {
-    .Dank-image1 {
-        display: none;
-    }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
 }
 
-.Dank-image2{
-    height: 130px;
-    width: 130px;
-    position: absolute;
-    top: 672px;
-    left: -17px;
-
-}
-/* Hide the image on screens smaller than 600px */
-@media (max-width: 1400px) {
-    .Dank-image2 {
-        display: none;
-    }
+body {
+    font-family: 'Space Mono', monospace;
+    background-color: #0a192f;
+    color: #8892b0;
+    line-height: 1.6;
+    overflow-y: auto;
+    min-height: 100vh;
+    position: relative;
 }
 
-.Discord-theme {
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.minecraft-theme {
     background-color: var(--background);
     min-height: 100vh;
+    position: relative;
+    overflow-y: auto;
     padding-top: 100px;
+}
+
+.mc-projects {
+    padding: 4rem 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .section-header {
     margin-bottom: 3rem;
+    color: var(--accent);
 }
 
 .section-header h1 {
@@ -63,6 +64,12 @@
 }
 
 /* Filter Section */
+.filter-section {
+    text-align: left;
+    margin-bottom: 2rem;
+    max-width: 1200px;
+}
+
 .filter-container {
     max-width: 1200px;
     display: flex;
@@ -82,6 +89,10 @@
     border: 1px solid transparent;
 }
 
+.filter-btn:first-child {
+    margin-left: 0;
+}
+
 .filter-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
@@ -95,28 +106,23 @@
 
 /* Projects Grid */
 .projects-grid {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 2rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2.5rem;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .project-card {
-    background: rgba(44, 44, 44, 0.9);
-    border-radius: 10px;
-    padding: 20px;
-    position: relative;
     width: 100%;
     height: 400px;
-    perspective: 1000px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+    margin: 0 auto;
+    display: block; /* Show by default */
 }
 
-.project-card:hover {
-    transform: scale(1.02);
+.project-card.hide {
+    display: none; /* Hide when filtered out */
 }
 
 .card-inner {
@@ -143,7 +149,7 @@
     align-items: center;
     justify-content: center;
     background: #2c2c2c;
-    border: 2px solid #5865F2;
+    border: 2px solid #61dafb;
     border-radius: 8px;
     padding: 20px;
 }
@@ -167,14 +173,14 @@
 
 .card-front .project-category {
     font-size: 0.9em;
-    color: #5865F2;
+    color: #61dafb;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin: 15px 0;
     padding: 5px 15px;
-    border: 1px solid #5865F2;
+    border: 1px solid #61dafb;
     border-radius: 20px;
-    background: rgba(88, 101, 242, 0.1);
+    background: rgba(97, 218, 251, 0.1);
 }
 
 .card-front h3 {
@@ -203,7 +209,7 @@
 
 /* Hover effects */
 .project-card:hover {
-    box-shadow: 0 8px 16px rgba(88, 101, 242, 0.2);
+    box-shadow: 0 8px 16px rgba(97, 218, 251, 0.2);
 }
 
 .project-category {
@@ -211,7 +217,7 @@
 }
 
 .project-card:hover .project-category {
-    background: rgba(88, 101, 242, 0.2);
+    background: rgba(97, 218, 251, 0.2);
 }
 
 /* Responsive adjustments */
@@ -231,6 +237,13 @@
     }
 }
 
+@media (min-width: 768px) {
+    .project-card {
+        min-width: 350px;
+        max-width: 400px;
+    }
+}
+
 /* Stats Section */
 .stats-container {
     display: flex;
@@ -239,6 +252,7 @@
     margin: 3rem auto;
     max-width: 1200px;
     padding: 0 2rem;
+    overflow-y: visible;
 }
 
 .stat-card {
@@ -293,6 +307,50 @@
     line-height: 1.5;
 }
 
+.minecraft-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(100, 255, 218, 0.5);
+    pointer-events: none;
+    animation: float 10s infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .projects-grid {
@@ -314,92 +372,72 @@
     }
 }
 
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    background: var(--background);
+    padding: 10px 20px;
 }
 
-.menu-toggle {
-    display: none;
-    cursor: pointer;
-    z-index: 1001;
+.nav-links {
+    display: flex;
+    list-style: none;
 }
 
-.hamburger {
-    padding: 10px;
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Show the menu icon and hide the nav links on smaller screens */
+@media (max-width: 780px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: -100%;
+        background-color: #0a192f;
+        border: 1px solid #64ffda;
+        padding: 10px;
+        flex-direction: column;
+        transition: left 0.3s ease;
+    }
+    .menu-icon {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+    }
+}
+
+/* Show the nav links when the menu icon is clicked */
+.nav-links.active {
+    left: 0;
+}
+
+/* Animation for the menu icon */
+.menu-icon.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-icon.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
 }
 
 .bar {
-    display: block;
     width: 25px;
     height: 3px;
-    margin: 5px auto;
-    background-color: var(--text-primary);
+    background-color: #fff;
+    margin: 4px 0;
     transition: all 0.3s ease;
-}
-
-@media screen and (max-width: 780px) {
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-links {
-        position: fixed;
-        right: -100%;
-        top: 70px;
-        gap: 0;
-        flex-direction: column;
-        background-color: var(--background);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-        padding: 20px 0;
-    }
-
-    .nav-links.active {
-        right: 0;
-    }
-
-    .nav-links li {
-        margin: 16px 0;
-    }
-
-    .menu-toggle.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .menu-toggle.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-}
-
-.particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: rgba(100, 255, 218, 0.5);
-    animation: float 10s linear infinite;
-    opacity: 0.5;
-    box-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
-}
-
-@keyframes float {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-100vh);
-    }
 }

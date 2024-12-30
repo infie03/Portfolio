@@ -5,18 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discord Development Projects</title>
-    <link rel="stylesheet" href="help.css">
     <link rel="stylesheet" href="discord.css">
+    <link rel="stylesheet" href="help.css">
+    <link rel="stylesheet" href="../shared-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;600&display=swap"
         rel="stylesheet">
     <style>
         .project-card {
             transition: transform 0.3s ease-in-out;
+            perspective: 1000px;
         }
 
         .project-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .card-inner {
@@ -28,7 +31,7 @@
             transform-style: preserve-3d;
         }
 
-        .project-card.flipped .card-inner {
+        .project-card:hover .card-inner {
             transform: rotateY(180deg);
         }
 
@@ -46,56 +49,18 @@
 
         .card-back {
             transform: rotateY(180deg);
-        }
-
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            z-index: 1000;
-        }
-
-        .popup-content {
             display: flex;
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #1D1D1D;
-            padding: 20px;
-            border: 2px solid #404040;
-            border-radius: 5px;
-            width: 90%;
-            max-width: 1200px;
-            max-height: 90vh;
-            gap: 20px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #2c2c2c;
+            color: #ffffff;
         }
 
-        .popup-left {
-            width: 40%;
-            padding: 15px;
-            background-color: #2c2c2c;
-            border: 1px solid #404040;
-            border-radius: 4px;
-        }
-
-        .popup-left .project-card {
-            width: 100%;
-            margin: 0;
-            transform: none;
-        }
-
-        .popup-right {
-            width: 60%;
-            padding: 15px;
-            background-color: #2c2c2c;
-            border: 1px solid #404040;
-            border-radius: 4px;
-            overflow-y: auto;
+        .card-back p {
+            margin: 15px 0;
+            color: #b9bbbe;
+            line-height: 1.6;
         }
 
         .left-side {
@@ -113,18 +78,6 @@
             width: 45%;
         }
 
-        .close-btn {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            cursor: pointer;
-            font-size: 24px;
-            color: #fff;
-            background: none;
-            border: none;
-            padding: 5px 10px;
-        }
-
         @media (min-width: 768px) {
             .popup-content {
                 flex-direction: row;
@@ -132,23 +85,37 @@
             }
         }
     </style>
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
 </head>
 
 <body class="Discord-theme">
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">Portfolio._</div>
-        <ul class="nav-links">
-            <li style="text-decoration: none;"><a href="../index.html">Home</a></li>
-        </ul>
-    </nav>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Portfolio._</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+            <div class="menu-icon" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </header>
+
+    <img src="images/discord-icon.png" alt="Discord-photo" class="Discord-photo1">
+
+    <img src="images/dank1.png" alt="Dank-image" class="Dank-image1">
+
+    <img src="images/dank2.png" alt="Dank-image2" class="Dank-image2">
 
     <!-- Discord Projects Section -->
     <div class="Discord-particles-1"></div>
 
-    <section class="mc-projects">
+    <section class="discord-projects">
         <div class="section-header">
-            <h1 style="font-size: 39px;">Discord Development</h1>
+            <h1 style="font-size: 39px;">Discord Bot Development</h1>
         </div>
 
         <!-- Filter Section -->
@@ -174,170 +141,62 @@
         <!-- Projects Grid -->
         <div class="projects-grid">
             <!-- Server Setup Projects -->
-            <div class="project-card" data-category="Server Setup" data-id="thunder-rtp">
+            <div class="project-card" data-category="Server Setup">
                 <div class="card-inner">
                     <div class="card-front">
-                        <img src="images/Discord-Symbol.png" alt="Server Setup Project"
-                            style="height: 201px; border-radius: 5px;">
+                        <img src="images/Discord-Symbol.png" alt="Server Setup Project" style="height: 201px; border-radius: 5px;">
                         <div class="card-content">
                             <div class="project-category">Server Setup</div>
                             <h3>Majha Network</h3>
                         </div>
                     </div>
                     <div class="card-back">
-                        <img style="height: 140px;" src="images/dc-logo.png" alt="Thunder RTP images">
+                        <img style="height: 140px;" src="images/dc-logo.png" alt="Server Setup Project">
                         <br>
-                        <p>Thunder RTP is a cutting-edge Minecraft plugin designed for Spigot, paper servers, aimed at
-                            enhancing player engagement through a unique quarry system.</p>
-                        <div class="project-link" onclick="showDetails('thunder-rtp')">View Details</div>
+                        <p>A comprehensive Discord server setup with custom roles, channels, and automated moderation.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Bot Integration Projects -->
-            <div class="project-card" data-category="Bot-Integration" data-id="advanced-rtp">
+            <div class="project-card" data-category="Bot-Integration">
                 <div class="card-inner">
                     <div class="card-front">
-                        <img src="images/Discord-Symbol.png" alt="Bot Integration Project"
-                            style="height: 201px; border-radius: 5px;">
+                        <img src="images/Discord-Symbol.png" alt="Bot Integration Project" style="height: 201px; border-radius: 5px;">
                         <div class="card-content">
                             <div class="project-category">Bot Integration</div>
-                            <h3>Advanced Combat Mod</h3>
+                            <h3>Custom Discord Bot</h3>
                         </div>
                     </div>
                     <div class="card-back">
-                        <img style="height: 140px;" src="images/dc-logo.png" alt="Thunder RTP images">
+                        <img style="height: 140px;" src="images/dc-logo.png" alt="Bot Integration Project">
                         <br>
-                        <p>Enhances combat mechanics with new weapons, abilities, and combat systems.</p>
-                        <div class="project-link" onclick="showDetails('advanced-rtp')">View Details</div>
+                        <p>A feature-rich Discord bot with moderation, music, and utility commands.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Community Management Projects -->
-            <div class="project-card" data-category="Community-Management" data-id="Community-Management">
+            <div class="project-card" data-category="Community-Management">
                 <div class="card-inner">
                     <div class="card-front">
-                        <img src="images/Discord-Symbol.png" alt="Community Management Project"
-                            style="height: 201px; border-radius: 5px;">
+                        <img src="images/Discord-Symbol.png" alt="Community Management Project" style="height: 201px; border-radius: 5px;">
                         <div class="card-content">
                             <div class="project-category">Community Management</div>
                             <h3>Samicha Rana</h3>
                         </div>
                     </div>
                     <div class="card-back">
-                        <img style="height: 140px;" src="images/dc-logo.png" alt="Thunder RTP images">
+                        <img style="height: 140px;" src="images/dc-logo.png" alt="Community Management Project">
                         <br>
-                        <p>Design Wave Discord server offers top-notch community management, fostering engagement, support, and growth for a vibrant online community. 😊</p>
-                        <div class="project-link" onclick="showDetails('Community-Management')">View Details</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="Community-Management" data-id="Community-Management">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <img src="images/Discord-Symbol.png" alt=" Community-Management Project"
-                            style="height: 201px; border-radius: 5px;">
-                        <div class="card-content">
-                            <div class="project-category">Community Management</div>
-                            <h3>Not found!</h3>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <img style="height: 140px;" src="images/dc-logo.png" alt="Thunder RTP images">
-                        <br>
-                        <p>Enter Text Here!</p>
-                        <div class="project-link" onclick="showDetails('resource-1')">View Details</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Community-Management -->
-            <div class="project-card" data-category="Community-Management" data-id="Community-Management">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <img src="images/Discord-Symbol.png" alt=" Community Management Project"
-                            style="height: 201px; border-radius: 5px;">
-                        <div class="card-content">
-                            <div class="project-category">Community Management</div>
-                            <h3>Not found!</h3>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <img style="height: 140px;" src="images/dc-logo.png" alt="Thunder RTP images">
-                        <br>
-                        <p>Enter Text Here!</p>
-                        <div class="project-link" onclick="showDetails('resource-2')">View Details</div>
+                        <p>Design Wave Discord server offers top-notch community management, fostering engagement and growth.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Project Details Popup Structure -->
-    <div id="project-details-popup" class="popup">
-        <div class="popup-content">
-            <div class="popup-left">
-                <div class="popup-header">
-                    <h2 class="popup-title"></h2> <button class="popup-close" onclick="closePopup()">&times;</button>
-                </div>
-                <div class="project-details">
-                    <div class="popup-description"></div>
-                </div>
-            </div>
-            <div class="popup-right">
-                <div class="features-section">
-                    <h3>Features</h3>
-                    <ul class="features-list"></ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function showDetails(id) {
-            const selectedProject = document.querySelector(`[data-id="${id}"]`);
-            const frontContent = selectedProject.querySelector('.card-front').innerHTML;
-            const backContent = selectedProject.querySelector('.card-back').innerHTML;
-
-            const popup = document.getElementById('project-details-popup');
-            const popupLeft = popup.querySelector('.popup-left');
-            const popupRight = popup.querySelector('.popup-right');
-
-            if (popupLeft) popupLeft.innerHTML = `
-                <div class="project-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            ${frontContent}
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            if (popupRight) popupRight.innerHTML = backContent;
-            popup.style.display = 'block';
-        }
-
-        function closePopup() {
-            document.getElementById('project-details-popup').style.display = 'none';
-        }
-
-        // Close popup when clicking outside
-        document.getElementById('project-details-popup').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closePopup();
-            }
-        });
-
-        // Close popup with Escape key
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                closePopup();
-            }
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
     <script src="discord.js"></script>
 </body>
-
 </html>

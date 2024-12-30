@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINECRAFT | SERVER SETUP</title>
+    <link rel="stylesheet" href="../../../help.css">
+    <link rel="stylesheet" href="../help1.css">
+    <link rel="stylesheet" href="../../../mine.css">
+    <link rel="stylesheet" href="../../../../shared-nav.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .project-card {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+        .project-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+        .project-title {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .minecraft-button {
+            background-color: #2c2c2c;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .minecraft-button:hover {
+            background-color: #333;
+        }
+
+        @media (min-width: 768px) {
+            .popup-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+        .projects-grid{
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        /* Bedwars Theme Styles */
+
+        .projects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 2rem 0;
+            justify-content: space-evenly;
+        }
+
+        .project-card {
+            background: #2c2c2c;
+            border: 3px solid #ff0000;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+        .project-title {
+            color: #ff0000;
+            margin-bottom: 1rem;
+            font-size: 1.2em;
+        }
+
+        .project-description {
+            color: #cccccc;
+            margin-bottom: 1rem;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+
+<body class="minecraft-theme">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">Portfolio._</div>
+        <ul class="nav-links">
+            <li><a href="../../../../index.html">01 // Home</a></li>
+            <li><a href="../../server-setup/server.html">02 // Back</a></li>
+        </ul>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <!-- Minecraft Projects Section -->
+    <div class="particles-container">
+        <div class="minecraft-particles"></div>
+    </div>
+
+    <section class="minecraft-projects">
+        <div class="section-header">
+            <h1 style="font-size: 39px; display: flex; justify-content: center;">Minecraft BedWars Setup</h1>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+
+            <!-- ? Config Project -->
+
+            <div class="project-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="../images/bedwars.png" alt="bedwars-image" class="project-image">
+                        <h3 class="project-title">BedWars</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="../images/bedwars.png" alt="bedwars-image" class="project-image">
+                        <h3 class="project-title">BedWars</h3>
+                        <p class="project-description">Bed Wars is a Minecraft mini-game where teams protect their beds, gather resources, and destroy opponents' beds to win.
+                        </p>
+                        <a href="bedwars-projects.html" class="minecraft-button">View Projects</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="../images/bedwars.png" alt="bedwars-image" class="project-image">
+                        <h3 class="project-title">Moded Bedwars</h3>
+                    </div>
+                    <div class="card-back">
+                        <img src="../images/bedwars.png" alt="bedwars-image" class="project-image">
+                        <h3 class="project-title">Moded Bedwars</h3>
+                        <p class="project-description">Modded Bedwars adds guns, grenades, pop-up towers, and more to the classic Minecraft Bedwars game
+                        </p>
+                        <a href="moded-Bedwars-p.html" class="minecraft-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="../../../mine.js"></script>
+</body>
+
+</html>

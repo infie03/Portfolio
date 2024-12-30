@@ -6,24 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="shared-nav.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 </head>
-<!-- This Website is made by Infie_03 -->
+<!-- ! This Website is made by Infie_03 -->
 
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">Portfolio._</div>
+
         <ul class="nav-links">
-            <li><a href="#home">01 // Home</a></li>
-            <li><a href="#expertise">02 // Expertise</a></li>
-            <li><a href="#work">03 // Projects</a></li>
-            <li><a href="#contact">04 // Contact</a></li>
+            <li id="a1"><a href="#home">01 // Home</a></li>
+            <li id="a2"><a href="#expertise">02 // Expertise</a></li>
+            <li id="a3"><a href="#work">03 // Projects</a></li>
+            <li id="a4"><a href="#contact">04 // Contact</a></li>
         </ul>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
     </nav>
+
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -32,8 +40,8 @@
                 <div class="shape cube"></div>
                 <div class="shape sphere"></div>
             </div>
-            <h1>MINECRAFT DEVELOPER</h1>
-            <p class="subtitle">Creating innovative, engaging, and immersive game experiences.</p>
+            <h1 id="Mine1">MINECRAFT DEVELOPER</h1>
+            <p class="subtitle" id="sub">Creating innovative, engaging, and immersive game experiences.</p>
             <div class="scroll-indicator">
 
                 <div class="e-lottie__container">
@@ -130,7 +138,7 @@
 <span class="tag"><</span><span class="tag">/html</span><span class="tag">></span>
             </code>
         </div>
-        <h2>My Expertise</h2>
+        <h2 id="Expertise">My Expertise</h2>
         <div class="expertise-grid">
             <div class="expertise-card">
                 <div class="expertise-header">
@@ -139,18 +147,22 @@
                 </div>
                 <div class="code-block">
                     <span class="code-tag">&lt;h3&gt;</span>
-                    <p>Creating innovative, engaging, and immersive game experiences. Developed custom plugins, mods, and optimized server configurations to enhance gameplay, introduce new features, and improve performance.</p>
+                    <p>Creating innovative, engaging, and immersive game experiences. Developed custom plugins, mods,
+                        and optimized server configurations to enhance gameplay, introduce new features, and improve
+                        performance.</p>
                     <span class="code-tag">&lt;/h3&gt;</span>
                 </div>
             </div>
             <div class="expertise-card">
                 <div class="expertise-header">
                     <i class="fas fa-mobile-alt"></i>
-                    <h3><span class="highlight orange">Discord</span ><br>Community Manager<br>(2021-2022)</h3>
+                    <h3><span class="highlight orange">Discord</span><br>Community Manager<br>(2021-2022)</h3>
                 </div>
                 <div class="code-block">
                     <span class="code-tag">&lt;h3&gt;</span>
-                    <p>Managed and grew a vibrant online community, moderated discussions, organized events, and implemented engagement strategies, resulting in increased participation and member satisfaction.</p>
+                    <p>Managed and grew a vibrant online community, moderated discussions, organized events, and
+                        implemented engagement strategies, resulting in increased participation and member satisfaction.
+                    </p>
                     <span class="code-tag">&lt;/h3&gt;</span>
                 </div>
             </div>
@@ -161,7 +173,9 @@
                 </div>
                 <div class="code-block">
                     <span class="code-tag">&lt;h3&gt;</span>
-                    <p>Developed and maintained responsive web applications using HTML, CSS, and JavaScript. Enhanced user experience with modern designs and intuitive interfaces, resulting in improved user engagement and satisfaction.</p>
+                    <p>Developed and maintained responsive web applications using HTML, CSS, and JavaScript. Enhanced
+                        user experience with modern designs and intuitive interfaces, resulting in improved user
+                        engagement and satisfaction.</p>
                     <span class="code-tag">&lt;/h3&gt;</span>
                 </div>
             </div>
@@ -186,7 +200,7 @@
                             optimized server configurations for unique gameplay, new features, and improved performance.
                             Unleash your creativity and enjoy endless possibilities.</p>
                         <div onclick="window.location.href='minecraft/mine.html'" class="work-link"
-                        style="cursor: pointer;">
+                            style="cursor: pointer;">
                             View Project
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -207,7 +221,7 @@
                             seamlessly to any device. Enhance user experience with modern designs, intuitive interfaces,
                             and optimized performance for a dynamic online presence.
                         </p>
-                        <a href="web.html" class="work-link">
+                        <a href="Web/web.html" class="work-link">
                             View Project
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -224,7 +238,9 @@
                     <div class="work-info">
                         <div class="work-category">INFIE_03</div>
                         <h3 class="work-title">Discord Development</h3>
-                        <p class="work-description">Expert in professional Discord server setup, bot integration, and community management. Enhanced user engagement, streamlined server operations, and implemented innovative solutions to create a thriving and interactive community.
+                        <p class="work-description">Expert in professional Discord server setup, bot integration, and
+                            community management. Enhanced user engagement, streamlined server operations, and
+                            implemented innovative solutions to create a thriving and interactive community.
                         </p>
                         <a href="Discord/discord.html" class="work-link">
                             View Project
@@ -269,7 +285,8 @@
                                 <span>Github</span>
                                 <span class="link-arrow">→</span>
                             </a>
-                            <a href="https://www.spigotmc.org/members/infie_03.2179364/" class="contact-link" target="_blank">
+                            <a href="https://www.spigotmc.org/members/infie_03.2179364/" class="contact-link"
+                                target="_blank">
                                 <i class="fas fa-code"></i>
                                 <span>SpigotMC</span>
                                 <span class="link-arrow">→</span>
@@ -287,9 +304,10 @@
             </div>
         </div>
     </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="nav.js"></script>
 </body>
 
 </html>

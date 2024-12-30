@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composter Manager - Minecraft Plugin</title>
+    <link rel="stylesheet" href="compost.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+    <button class="back-button" onclick="goBack()">Back</button>
+    <div class="minecraft-container">
+        <header class="plugin-header">
+            <h1>Composter Manager</h1>
+            <p class="version">Version 1.0</p>
+        </header>
+        
+        <nav class="navbar plugin-nav">
+
+            <div class="menu-icon" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#commands">Commands</a></li>
+                <li><a href="#permissions">Permissions</a></li>
+                <li><a href="#configuration">Configuration</a></li>
+                <li><a href="#installation">Installation</a></li> 
+            </ul>
+        </nav>
+
+        <main class="plugin-content">
+            <section id="overview">
+                <h2>Overview</h2>
+                <p>Composter Manager is a Minecraft plugin designed to enhance the use of composters in the game. It allows players and server admins to customize composter mechanics, add rewards, and create interactive features to enrich gameplay.</p>
+            </section>
+
+            <section id="features">
+                <h2>Features</h2>
+                <ul>
+                    <li>Custom compostable items</li>
+                    <li>Unique rewards for composting</li>
+                    <li>Administrative controls for server staff</li>
+                    <li>Easy-to-configure mechanics</li>
+                    <li>Detailed permissions system</li>
+                    <li>Customizable messages and sounds</li>
+                </ul>
+            </section>
+
+            <section id="commands">
+                <h2>Commands</h2>
+                <div class="command-block">
+                    <h3>/compost add &lt;item&gt;</h3>
+                    <p>Adds an item to the composter's list of compostable materials.</p>
+                    <p class="permission">Permission: compostmanager.admin</p>
+                </div>
+                <div class="command-block">
+                    <h3>/compost list</h3>
+                    <p>Displays the list of all compostable items.</p>
+                    <p class="permission">Permission: Default</p>
+                </div>
+                <div class="command-block">
+                    <h3>/compost reload</h3>
+                    <p>Reloads the plugin's configuration files.</p>
+                    <p class="permission">Permission: compostmanager.admin</p>
+                </div>
+            </section>
+
+            <section id="configuration">
+                <h2>Configuration</h2>
+                <div class="config-example">
+                    <pre><code># Composter Manager Configuration
+
+compostable-items:
+  - "minecraft:apple"
+  - "minecraft:carrot"
+  - "minecraft:potato"
+
+rewards:
+  enable: true
+  reward-items:
+    - "minecraft:bone_meal:3" # Gives 3 bone meal
+    - "minecraft:diamond:1" # Rare chance for a diamond
+
+messages:
+  prefix: "&6[Composter Manager] "
+  success: "&aItem successfully composted!"
+  no-permission: "&cYou do not have permission to perform this action."
+
+sounds:
+  success:
+    sound: ENTITY_PLAYER_LEVELUP
+    volume: 1.0
+    pitch: 1.0
+
+admin-settings:
+  reload-permission: "compostmanager.admin"
+  max-items-per-compost: 10
+</code></pre>
+                </div>
+                <p class="config-note">Note:
+                <ul>
+                    <li>Color codes (&) are used for Minecraft's color formatting system. The configuration supports custom compostable items, rewards, messages, and sounds.</li>
+                    <li>This configuration file is optional; the plugin will generate a default file if none exists.</li>
+                </ul>
+                </p>
+            </section>
+
+            <section id="installation">
+                <h2>Installation</h2>
+                <ol>
+                    <li>Download <a href="https://www.spigotmc.org/resources/composter-manager" target="_blank" style="text-decoration: none; color: #5cbd33;">Composter-Manager.jar</a></li>
+                    <li>Place the jar file in your server's plugins folder.</li>
+                    <li>Restart your server to load the plugin.</li>
+                    <li>Configure compostable items and rewards in the config.yml file.</li>
+                    <li>Set up permissions for staff and players.</li>
+                    <li>Done! Enjoy the enhanced composter system.</li>
+                </ol>
+            </section>
+        </main>
+
+        <footer class="plugin-footer">
+            <p>Composter Manager v1.0 - Enhance Your Minecraft Composting Experience</p>
+            <div class="footer-links">
+                <a href="https://www.spigotmc.org/resources/composter-manager" target="_blank">
+                    <span>SpigotMC</span></a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuIcon = document.querySelector('.menu-icon');
+
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('active');
+            } else {
+                navLinks.classList.add('active');
+                menuIcon.classList.add('active');
+
+            }
+        }
+
+        // Close the menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.querySelector('.nav-links');
+                const menuIcon = document.querySelector('.menu-icon');
+
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('active');
+            });
+        });
+    </script>
+    <script src="compost.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</body>
+
+</html>

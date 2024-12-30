@@ -103,6 +103,131 @@ h3 {
     width: 100%;
 }
 
+/* Mobile Navigation */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--text-primary);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 780px) {
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 5rem;
+        flex-direction: column;
+        background: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        border-radius: 10px;
+        text-align: center;
+        transition: 0.3s;
+        padding: 2rem 0;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .navbar {
+        padding: 1rem 2rem;
+    }
+}
+
+@media screen and (min-width: 781px) and (max-width: 1000px) {
+    .navbar {
+        padding: 1.5rem 3rem;
+    }
+    
+    .nav-links {
+        gap: 1.5rem;
+    }
+}
+
+/* Hamburger Menu Styles */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger {
+    padding: 10px;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 1000px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: var(--background);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 20px 0;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 16px 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .navbar {
+        padding: 1rem;
+    }
+}
+
 /* Hero Section */
 .hero {
     height: 100vh;
